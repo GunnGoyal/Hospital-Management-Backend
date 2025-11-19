@@ -2,76 +2,197 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Doctor Login</title>
     <link rel="stylesheet" href="/css/style.css">
     <style>
-        body {
-            font-family: Arial, sans-serif;
-            background: url('https://images.pexels.com/photos/4197564/pexels-photo-4197564.jpeg') no-repeat center center fixed;
-            background-size: cover;
-            min-height: 100vh;
+        * {
             margin: 0;
+            padding: 0;
+            box-sizing: border-box;
         }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+        }
+
         .container {
-            max-width: 400px;
-            margin: 80px auto;
-            background: rgba(240,248,255,0.95);
-            padding: 32px;
-            border-radius: 12px;
-            box-shadow: 0 2px 16px rgba(0,0,0,0.12);
-            text-align: center;
-        }
-        h2 {
-            color: #007bff;
-            margin-bottom: 32px;
-        }
-        label {
-            display: block;
-            margin-top: 16px;
-            color: #333;
-        }
-        input {
+            max-width: 420px;
             width: 100%;
-            padding: 8px;
-            margin-top: 4px;
-            border-radius: 4px;
-            border: 1px solid #ccc;
+            background: #ffffff;
+            padding: 40px;
+            border-radius: 20px;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.2);
+            animation: fadeIn 0.5s ease-in;
         }
-        .btn {
-            margin-top: 24px;
-            padding: 12px 24px;
-            background: #007bff;
-            color: #fff;
-            border: none;
-            border-radius: 4px;
-            cursor: pointer;
-            box-shadow: 0 1px 4px rgba(0,0,0,0.08);
-            transition: background 0.2s;
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(-20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
         }
-        .btn:hover {
-            background: #0056b3;
+
+        .logo {
+            text-align: center;
+            margin-bottom: 30px;
         }
-        .register-link {
+
+        .logo h1 {
+            color: #667eea;
+            font-size: 28px;
+            font-weight: 700;
+            margin-bottom: 8px;
+        }
+
+        .logo p {
+            color: #6b7280;
+            font-size: 14px;
+        }
+
+        .form-group {
+            margin-bottom: 24px;
+        }
+
+        .form-group label {
             display: block;
+            color: #374151;
+            font-size: 14px;
+            font-weight: 600;
+            margin-bottom: 8px;
+        }
+
+        .form-group input {
+            width: 100%;
+            padding: 12px 16px;
+            border: 2px solid #e5e7eb;
+            border-radius: 10px;
+            font-size: 15px;
+            transition: all 0.3s ease;
+            outline: none;
+        }
+
+        .form-group input:focus {
+            border-color: #667eea;
+            box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
+        }
+
+        .form-group input::placeholder {
+            color: #9ca3af;
+        }
+
+        .btn-login {
+            width: 100%;
+            padding: 14px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border: none;
+            border-radius: 10px;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+            margin-top: 10px;
+        }
+
+        .btn-login:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(102, 126, 234, 0.4);
+        }
+
+        .btn-login:active {
+            transform: translateY(0);
+        }
+
+        .divider {
+            display: flex;
+            align-items: center;
+            text-align: center;
+            margin: 24px 0;
+            color: #9ca3af;
+            font-size: 14px;
+        }
+
+        .divider::before,
+        .divider::after {
+            content: '';
+            flex: 1;
+            border-bottom: 1px solid #e5e7eb;
+        }
+
+        .divider span {
+            padding: 0 10px;
+        }
+
+        .footer-links {
+            text-align: center;
             margin-top: 24px;
-            color: #007bff;
+        }
+
+        .footer-links a {
+            color: #667eea;
+            text-decoration: none;
+            font-size: 14px;
+            transition: color 0.2s ease;
+        }
+
+        .footer-links a:hover {
+            color: #764ba2;
             text-decoration: underline;
+        }
+
+        .alert {
+            padding: 12px 16px;
+            border-radius: 8px;
+            margin-bottom: 20px;
+            font-size: 14px;
+        }
+
+        .alert-error {
+            background-color: #fee2e2;
+            color: #991b1b;
+            border: 1px solid #fecaca;
+        }
+
+        .alert-success {
+            background-color: #d1fae5;
+            color: #065f46;
+            border: 1px solid #a7f3d0;
+        }
+
+        @media (max-width: 480px) {
+            .container {
+                padding: 30px 24px;
+            }
+
+            .logo h1 {
+                font-size: 24px;
+            }
         }
     </style>
 </head>
 <body>
     <div class="container">
-        <h2>Doctor Login</h2>
-        <form action="/doctors/login" method="POST">
-            <label for="contact">Email</label>
-            <input type="email" id="contact" name="contact" required>
+        <div class="logo">
+            <h1>🏥 Hospital Portal</h1>
+            <p>Doctor Login</p>
+        </div>
 
-            <label for="password">Password</label>
-            <input type="password" id="password" name="password" required>
+        <% if (typeof error !== 'undefined' && error) { %>
+            <div class="alert alert-error">
+                <%= error %>
+            </div>
+        <% } %>
 
-            <button type="submit" class="btn">Login</button>
-        </form>
-    <a href="/doctors/register" class="register-link">Don't have an account? Register here</a>
-    </div>
-</body>
-</html>
+        <form action="/login" method="POST">
+            <div class="form-group
